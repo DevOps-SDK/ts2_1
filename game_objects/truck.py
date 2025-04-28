@@ -17,7 +17,13 @@ class Truck:
         self.erz = 0  # Erzladung des LKW
         self.fuel_usage_timer = 0  # Zeitmesser für Verbrauch
 
-        
+    def use_Fuel(self):
+        self.fuel_usage_timer += 1
+        if self.fuel_usage_timer >= Config.FUEL_CONSUMPTION_TIME:
+            self.fuel -= 1
+            self.fuel_usage_timer = 0
+            if self.fuel < 0:
+                self.fuel = 0   
 
     def move(self, keys):
         if self.fuel <= 0:
@@ -25,12 +31,17 @@ class Truck:
 
         if keys[pygame.K_w]:
             self.y -= self.speed
+            self.use_Fuel()
         if keys[pygame.K_s]:
             self.y += self.speed
+            self.use_Fuel()
         if keys[pygame.K_a]:
             self.x -= self.speed
+            self.use_Fuel()
         if keys[pygame.K_d]:
-            self.x += self.speed  
+            self.x += self.speed 
+            self.use_Fuel() 
+        
 
         # Grenzen prüfen
         if self.x < 0:
@@ -43,12 +54,7 @@ class Truck:
            self.y = 600 - self.HEIGHT
 
         # Spritverbrauch steuern # Fuel verbrauchen alle 30 Frames (~0.5 Sek bei 60 FPS)
-        self.fuel_usage_timer += 1
-        if self.fuel_usage_timer >= Config.FUEL_CONSUMPTION_TIME:
-            self.fuel -= 1
-            self.fuel_usage_timer = 0
-            if self.fuel < 0:
-                self.fuel = 0 
+        
 
     def draw(self, screen):
         screen.blit(self.image, (self.x, self.y))
