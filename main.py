@@ -137,14 +137,14 @@ def main_game():
     if ziel.erz_empfangen >= ziel_erforderlich:
         screen.fill((0, 0, 0))  # Bildschirm schwarz (oder leicht transparent Overlay)
         font_small = pygame.font.SysFont(None, 72)
-        win_text = font_small.render("🎉 Sieg! Genügend Erz geliefert! drück 'R' für Restart", True, (0, 255, 0))
+        win_text = font_small.render("Sieg! Genügend Erz geliefert! drück 'R' für Restart", True, (0, 255, 0))
         screen.blit(win_text, (SCREEN_WIDTH // 2 - win_text.get_width() // 2, SCREEN_HEIGHT // 2 - 40))
         pygame.display.flip()
 
     if quelle.erz_vorrat == 0 and lkw.erz == 0 and ziel.erz_empfangen < ziel_erforderlich:
         screen.fill((0, 0, 0))
         font_small = pygame.font.SysFont(None, 72)
-        lose_text = font_small.render("💀 Niederlage! Erz verloren! drück 'R' für Restart", True, (255, 0, 0))
+        lose_text = font_small.render("Niederlage! Erz verloren! drück 'R' für Restart", True, (255, 0, 0))
         screen.blit(lose_text, (SCREEN_WIDTH // 2 - lose_text.get_width() // 2, SCREEN_HEIGHT // 2 - 40))
         pygame.display.flip() 
     
@@ -152,7 +152,7 @@ def main_game():
     if lkw.fuel <= 0:
         screen.fill((0, 0, 0))
         font_big = pygame.font.SysFont(None, 50)
-        fuel_empty_text = font_big.render("💀 Niederlage! Treibstoff ist 0! Drück 'R' für Restart", True, (255, 0, 0))
+        fuel_empty_text = font_big.render("Niederlage! Treibstoff ist 0! Drück 'R' für Restart", True, (255, 0, 0))
         screen.blit(fuel_empty_text, (SCREEN_WIDTH // 2 - fuel_empty_text.get_width() // 2, SCREEN_HEIGHT // 2 - 40))
         pygame.display.flip()
 
