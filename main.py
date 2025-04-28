@@ -38,15 +38,9 @@ ziel = Station(SCREEN_WIDTH // 2 - 150, SCREEN_HEIGHT - 200, "assets/bilder/ziel
 heli = Helicopter(700, 50, "assets/bilder/heli.png")
 ui = UI()
 
+# Tankstelle erstellen
+tankstelle = Station(700, 500, "assets/bilder/tankstelle.png", "tankstelle")
 
-
-# Tankstelle laden
-tankstelle_img = pygame.image.load("assets/bilder/tankstelle.png")
-tankstelle_img = pygame.transform.scale(tankstelle_img, (64, 64))
-
-# Position Tankstelle
-tankstelle_x = 700  # X-Position der Tankstelle
-tankstelle_y = 500  # Y-Position der Tankstelle
 
 
 
@@ -84,8 +78,7 @@ def main_game():
     ziel.draw(screen)
 
     # Tankstelle anzeigen
-    screen.blit(tankstelle_img, (tankstelle_x, tankstelle_y))
-
+    tankstelle.draw(screen)
     # Tastaturabfrage für LKW-Bewegung
     keys = pygame.key.get_pressed()
     lkw.move(keys)
@@ -111,7 +104,7 @@ def main_game():
         lkw.erz = 0
 
     # Tanken, wenn LKW Tankstelle berührt
-    if lkw.get_rect().colliderect(pygame.Rect(tankstelle_x, tankstelle_y, 64, 64)):
+    if lkw.get_rect().colliderect(tankstelle.get_rect()):
         lkw.tanken()
     
     
